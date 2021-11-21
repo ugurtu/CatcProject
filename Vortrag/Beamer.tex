@@ -40,7 +40,7 @@
 \usetheme{Hannover}
 
 
-\title{Projekt: Name}
+\title{sleepCube}
 \author{Ugur Turhal, Silvan Lenzlinger \& Berkan Kurt}
 \institute{Universit\"at Basel}
 \date{\today}
@@ -50,35 +50,19 @@
 
 
 \frame{\maketitle}
-\frame{\tableofcontents}
+%\frame{\tableofcontents}
 
 
-\section{Allgemeines} 
+\section{Projekt Idee} 
 \begin{frame}[fragile]
-\textbf{ALLGEMEINES}
+\textbf{Projekt Idee}
 \begin{columns}
 \begin{column}{0.5\textwidth}
-
-\end{column}
-
-\begin{column}{0.5\textwidth}
-\begin{lstlisting}
-
-\end{lstlisting}
-\end{column}
-
-\end{columns}
-\end{frame}
-
-
-
-\section{Aufbau der Matrix für Poisson} 
-\begin{frame}[fragile]
-\textbf{POISSON}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-
-
+\begin{enumerate}[-]
+\item LED Cube
+\item Schlaf-Raumtemperatur
+\item CS Studenten \& Schlafmangel
+\end{enumerate}
 \end{column}
 
 \begin{column}{0.5\textwidth}
@@ -88,10 +72,44 @@
 \end{columns}
 \end{frame}
 
-\section{Aufbau der Matrix für impl. Euler} 
-\begin{frame}[fragile]
-\textbf{IMPL. EULER}
 
+
+\section{sleepCube - INFOS} 
+\begin{frame}[fragile]
+\textbf{sleepCube - INFOS}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item Mikrocontroller: Arduino UNO ATMega328
+\item Cube Grösse:  4 $\times$ 4 $\times$ 4
+\item LED Farben: \textcolor{red}{Rot} \& \textcolor{green}{Grün}, \underline{keine} RGB LEDs
+
+\end{itemize}
+
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item DHT22 für Temperaturmessgerät
+\item Genauer als TMP36
+\item \textcolor{red}{Rot-Leuchten} $<$15$^{\circ}$ C oder $>$18$^{\circ}$ C
+\item \textcolor{green}{Grün-Leuchten} $\geq$15$^{\circ}$ C oder $\leq$18$^{\circ}$ C
+\end{itemize}
+\end{column}
+
+\end{columns}
+\end{frame}
+
+\section{Mögliche Schwierigkeiten} 
+\begin{frame}[fragile]
+\textbf{Mögliche Schwierigkeiten}
+\begin{itemize}
+\item Sauberes Löten
+\item Symmetrischer Cube z.B. Abstände
+\item Ästhetik
+\item Gestell 
+\item Digitaler Temperatur Sensor (Noch nie benutzt)
+\end{itemize}
 \begin{columns}
 \begin{column}{0.45\textwidth}
 
@@ -105,9 +123,9 @@
 \end{frame}
 
 
-\section{Aufbau der Matrix für SDIRK2} 
+\section{Timeline} 
 \begin{frame}[fragile]
-\textbf{SDIRK2}
+\textbf{Timeline}
 \begin{columns}
 \begin{column}{0.45\textwidth}
 
@@ -118,6 +136,16 @@
 \end{column}
 
 \end{columns}
+\end{frame}
+
+\section{Fragen} 
+\begin{frame}[fragile]
+\textbf{Fragen}
+
+\begin{center}
+Fragen?
+\end{center}
+
 \end{frame}
 
 \end{document}
