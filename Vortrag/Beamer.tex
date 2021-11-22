@@ -11,35 +11,20 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{caption}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 \usepackage{enumerate}
 \usepackage{xcolor}
+\usepackage{chronology}
 \usepackage{tcolorbox}
 \usepackage{listings}
-\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
-\definecolor{mylilas}{RGB}{170,55,241}
 
-\lstset{language=Matlab,%
-    %basicstyle=\color{red},
-    breaklines=true,%
-    morekeywords={matlab2tikz},
-    keywordstyle=\color{blue},%
-    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
-    identifierstyle=\color{black},%
-    stringstyle=\color{mylilas},
-    commentstyle=\color{mygreen},%
-    showstringspaces=false,%without this there will be a symbol in the places where there is a space
-    numbers=left,%
-    numberstyle={\tiny \color{black}},% size of the numbers
-    numbersep=9pt, % this defines how far the numbers are from the text
-    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
-    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
-}
+\definecolor{mygreen}{RGB}{165, 215, 210}   % UBC Blue (primary)
 
-
-
+\usecolortheme[named=mygreen]{structure}
+\setbeamercolor{section in sidebar shaded}{fg=black}
 \usetheme{Hannover}
-
-
 \title{sleepCube}
 \author{Ugur Turhal, Silvan Lenzlinger \& Berkan Kurt}
 \institute{Universit\"at Basel}
@@ -53,23 +38,18 @@
 %\frame{\tableofcontents}
 
 
-\section{Projekt Idee} 
+\section{Projekt Idee}
 \begin{frame}[fragile]
 \textbf{Projekt Idee}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\begin{enumerate}[-]
+\begin{enumerate}[(1)]
 \item LED Cube
 \item Schlaf-Raumtemperatur
 \item CS Studenten \& Schlafmangel
 \end{enumerate}
-\end{column}
-
-\begin{column}{0.5\textwidth}
-
-\end{column}
-
-\end{columns}
+\begin{figure}[!h]
+\includegraphics[width=0.4\textwidth]{cube.jpg}
+\captionof{figure}{4 $x$ 4 $x$ 4 - LED Cube\footnote{\url{https://www.hackster.io/ProMaker_101/4x4x4-led-cube-making-d71684}}} \label{cube} 
+\end{figure}
 \end{frame}
 
 
@@ -126,16 +106,39 @@
 \section{Timeline} 
 \begin{frame}[fragile]
 \textbf{Timeline}
-\begin{columns}
-\begin{column}{0.45\textwidth}
+\begin{figure}
 
-\end{column}
-\begin{column}{0.5\textwidth}
+\begin{tikzpicture}[scale=0.5,every node/.style={outer sep=5pt}]
+    %Notation: {year, the title of the event}
+    %NOTE! Everyting is zero-based
+    \def\ourInfo{{
+        {"5. Dezember","Ugur: DHT und LEDs Testen auf Breadboard"},
+        {"10. Dezember","Silvan \& Berkan überlegen Aufbau"},
+        {"20. Dezember","Aufbau umsetzen: Löten etc."},
+        {"24. Januar 2022","Abgabe"},
+    }}
+    \pgfmathsetmacro{\length}{3}% Zero based.
 
-
-\end{column}
-
-\end{columns}
+    % Loop through the array containing all events.
+    \foreach \i in {0, ..., \length}{
+        \pgfmathsetmacro{\year}{\ourInfo[\i][0]}% Get the left cell (year)
+        \pgfmathsetmacro{\eventName}{\ourInfo[\i][1]}% Get the right cell (event name)
+        \draw[thick,mygreen] (0,-2*\i-2)--(0,-2*\i);% Draw vertical line
+        \ifnum \i=1 % Should be in red text
+          \draw(0,-2*\i-1) node[black, right, align = left]{\eventName};% Display the event name
+          \draw(0,-2*\i-1) node[black, left] {\year};
+        \else % Should be in black text
+           \draw(0,-2*\i-1) node[right, black]{\eventName};% Display the event name
+           \draw(0,-2*\i-1) node[left] {\year};% Display the year
+        \fi
+    }
+    % Draw the bullet with the dash
+    \foreach \i in {0, ..., \length}{
+        \filldraw[draw = white, fill = mygreen,thick] (0,-2*\i-1) circle (5pt);
+        \draw[thick,mygreen] (-12pt,-2*\i-1)--(0,-2*\i-1);
+    }
+\end{tikzpicture}
+\end{figure}
 \end{frame}
 
 \section{Fragen} 
