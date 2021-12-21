@@ -1,5 +1,5 @@
 \documentclass[12pt]{article}
-\usepackage[letterpaper,left=6.9cm,right=1.9cm,top=3.1cm,bottom=2.3cm]{geometry} % Márgenes y demás
+\usepackage[letterpaper,left=4.9cm,right=1.9cm,top=3.1cm,bottom=2.3cm]{geometry} % Márgenes y demás
 \usepackage[nswissgerman]{babel}
 
 \input{Styles_ACCEFN.sty}  
@@ -21,6 +21,42 @@
 \date{\today}                     
 \setcounter{Maxaffil}{0}
 
+\usepackage{listings}    
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.47,0.47,0.33}
+\definecolor{myorange}{rgb}{0.8,0.4,0}
+\definecolor{mywhite}{rgb}{0.98,0.98,0.98}
+\definecolor{myblue}{rgb}{0.01,0.61,0.98}
+
+\lstset{ %
+  backgroundcolor=\color{mywhite},   
+  basicstyle=\footnotesize,       
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                   
+  commentstyle=\color{mygray},    
+  deletekeywords={...},           
+  escapeinside={\%*}{*)},          
+  extendedchars=true,              
+  frame=false,                    
+  keepspaces=true,                 
+  keywordstyle=\color{myorange},       
+  language=C,                
+  morekeywords={*,...},            
+  numbers=left,                    
+  numbersep=5pt,                   
+  numberstyle=\tiny\color{mygray}, 
+  rulecolor=\color{black},         
+  rulesepcolor=\color{myblue},
+  showspaces=false,                
+  showstringspaces=false,          
+  showtabs=false,                  
+  stepnumber=2,                    
+  stringstyle=\color{myorange},    
+  tabsize=2,                       
+  title=\lstname                   
+}    
 
 
 
@@ -29,9 +65,8 @@
 
 \section{7.12.2021 - 18.12.2021 - Einkauf \& Testing}
 \justifying
-
-\textbf{Bestellung der Einzelteile} 
-Die Bestellung der Einzelteile war nicht simpel. Es haben sich grössere Fragen eröffnet: Ist das Kupferkabel genug stark, aber auch nicht zu dick im Umfang, für unsere Konstruktion? Wie wollen wir das verlöten? Was wenn ein Teil defekt ist? Wie lange dauert die Lieferung? Wir haben die Bestellung in Tranchen erhalten. Die Reihe war wiefolgt: Distrilec, Distrilec, Amazon \& Reichelt zu dem Einkäufe am 18.12.2021. \par \textbf{Testing} Ugur hat die Bestellung überprüft: Die LEDs wurden einzeln getestet ob diese funktionieren oder nicht, siehe Bild \ref{Fig:leds}. Die Funktionalität des Multimeters wurde mit der Knopfdruckbatterie getestet. Unser Motto, "lieber eine Komponente mehr"\text{ }hat sich bewährt, da ein Temperatur Sensor defekt geliefert wurde. Das wurde mittels einem Arduino getestet \& festgestellt. Ein DHT22 Sensor gab den gewünschten Output, der andere wurde nicht erkannt von dem Breadboard. Alle anderen Teile wurden auf Unversehrtheit überprüft, siehe Tabelle \ref{Tab:table1}.
+\subsection{Bestellung der Einzelteile} 
+Die Bestellung der Einzelteile war nicht simpel. Es haben sich grössere Fragen eröffnet: Ist das Kupferkabel genug stark, aber auch nicht zu dick im Umfang, für unsere Konstruktion? Wie wollen wir das verlöten? Was wenn ein Teil defekt ist? Wie lange dauert die Lieferung? Wir haben die Bestellung in Tranchen erhalten. Die Reihe war wiefolgt: Distrilec, Distrilec, Amazon \& Reichelt zu dem Einkäufe am 18.12.2021. \par \subsection{Testing} Ugur hat die Bestellung überprüft: Die LEDs wurden einzeln getestet ob diese funktionieren oder nicht, siehe Bild \ref{Fig:leds}. Die Funktionalität des Multimeters wurde mit der Knopfdruckbatterie getestet. Unser Motto, \glqq lieber eine Komponente mehr\grqq\ hat sich bewährt, da ein Temperatur Sensor defekt geliefert wurde. Das wurde mittels einem Arduino getestet \& festgestellt. Ein DHT22 Sensor gab den gewünschten Output, der andere wurde nicht erkannt von dem Breadboard. Alle anderen Teile wurden auf Unversehrtheit überprüft, siehe Tabelle \ref{Tab:table1}.
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{l|l}
@@ -67,4 +102,14 @@ Wir sind bereit, die nächsten Schritte vorzunehmen, diese Beinhalten:
 \item Lötumgang erlernen.
 \end{itemize} Ugur beginnt ein simples Modell zu erfassen. Auch erhalten wir \underline{alle} nächste Woche von Sarah-Lia einen Crashkurs zum Umgang mit dem Lötkolben, Flussmittel, Lötzinn \& Schrumpfschlauch.
 \section{Erstes Modell \& Einführung in das Löten}
+\subsection{DHT22}
+Als erstes muss die Library für DHT11/DHT22 hinzugefügt werden in der Arduino IDE. 
+\begin{lstlisting}
+#include "DHT.h" 
+//Pin Nummer wo der Sensor angeschlossen ist               
+#define DHTPIN 2
+// Hier wird definiert was fuer ein Sensor ausgelesen wird.
+#define DHTTYPE DHT11
+\end{lstlisting}
+\subsection{Einführung in das Löten}
 \end{document}
