@@ -1,4 +1,4 @@
-  #include "DHT.h"
+ #include "DHT.h"
   
   #define DHTPIN 50 //Pin Nummer wo der Sensor angeschlossen ist
   #define DHTTYPE DHT22 //Definition was fuer ein Sensor ausgelesen wird.
@@ -43,200 +43,76 @@
      h = dht.readHumidity();
      t = dht.readTemperature();
      printTemp();
-     
-   turnEverythingOn();//turn all on
-   if(t >= 18.00 && h >= 60.00){
-     randomflicker();
-     printTemp();
-   }
-   if( (t >= 15.00 && t <=18.00) && (h >= 30.00 && h <= 60.00) ){
-       layerstompUpAndDown();
-        printTemp();     
-      }
-    if ((t >= 15.00 && t <=18.00) && (h >= 60.00 )){
-      randomRain();
+
+     if(t < 15.00){
+      coldSleepTemp();
+       printTemp();     
+     }
+
+    if (t >= 18.00 ){
+      hotSleepTemp();
       printTemp();
      }
-    if ((t >= 15.00 && t <=18.00) && (h <= 30.00 )){
-      fire();
-      printTemp();
-     }
-    if ((h >= 20.00 && h <=60.00) && (t >= 18.00 )){
-      propeller();
-      printTemp();
-     }
-    if ((h >= 20.00 && h <=60.00) && (t <= 15.00 )){
-      aroundEdgeDown();
-      printTemp();
-     }
-  
-  
-  
-  
-   
-  }
-  
-  void printTemp(){
-     h = dht.readHumidity();
-     t = dht.readTemperature();
-   Serial.print("Humidity in % ");
-   Serial.print(h);
-   Serial.print(" Temperature in °C: ");
-   Serial.println(t); 
-    }
-  void turnEverythingOn()
-  {
-    for(int i = 0; i<16; i++)
-    {
-      digitalWrite(column[i], 0);
-    }
-    //turning on layers
-    for(int i = 0; i<4; i++)
-    {
-      digitalWrite(layer[i], 1);
-    }
-  }
-  
-  void turnEverythingOff()
-   {
-     for(int i = 0; i<16; i++)
-     {
-       digitalWrite(column[i], 1);
-     }
-     for(int i = 0; i<4; i++)
-     {
-       digitalWrite(layer[i], 0);
-     }
-   }
-  
-  void randomRain()
-  {
-    turnEverythingOff();
-    int x = 100;
-    for(int i = 0; i!=60; i+=2)
-    {
-      int randomColumn = random(0,16);
-      digitalWrite(column[randomColumn], 0);
-      digitalWrite(layer[0], 1);
-      delay(x+50);
-      digitalWrite(layer[0], 0);
-      digitalWrite(layer[1], 1);
-      delay(x+115);
-      digitalWrite(layer[1], 0);
-      digitalWrite(layer[2], 1);
-      delay(x+250);
-      digitalWrite(layer[2], 0);
-      digitalWrite(layer[3], 1);
-      delay(x+50);
-      digitalWrite(layer[3], 0);
-      digitalWrite(column[randomColumn], 1);
-     h = dht.readHumidity();
-     t = dht.readTemperature();
-     printTemp();
-    }
-  }
-  
-  void fire()
-  {
-    turnEverythingOff();
-    int x = 100;
-    for(int i = 0; i!=60; i+=2)
-    {
-      int randomColumn = random(0,16);
-      digitalWrite(column[randomColumn], 0);
-      digitalWrite(layer[3], 1);
-      delay(10);
-      digitalWrite(layer[3], 0);
-      digitalWrite(layer[2], 1);
-      delay(x+10);
-      digitalWrite(layer[2], 0);
-      digitalWrite(layer[1], 1);
-      delay(x+10);
-      digitalWrite(layer[1], 0);
-      digitalWrite(layer[0], 1);
-      delay(x+10);
-      digitalWrite(layer[0], 0);
-      digitalWrite(column[randomColumn], 1);
-     h = dht.readHumidity();
-     t = dht.readTemperature();
-     printTemp();
-    }
-  }
-  void aroundEdgeDown()
-  {
-       for(int i = 0; i<16; i++)
-    {
-      digitalWrite(column[i], 0);
-    }
-    //turning on layers
-    for(int i = 0; i<=1; i++)
-    {
-      digitalWrite(layer[i], 1);
-      delay(200);
-      digitalWrite(layer[i], 0);
-    }
-    
-    for(int x = 200; x != 0; x -=50)
-    {
-      turnEverythingOff();
-      for(int i = 4; i != 2; i--)
-      {
-        digitalWrite(layer[i-1], 1);
-        digitalWrite(column[5], 0);
-        digitalWrite(column[6], 0);
-        digitalWrite(column[9], 0);
-        digitalWrite(column[10], 0);
-        
-        digitalWrite(column[0], 0);
-        delay(x);
-        digitalWrite(column[0], 1);
-        digitalWrite(column[4], 0);
-        delay(x);
-        digitalWrite(column[4], 1);
-        digitalWrite(column[8], 0);
-        delay(x);
-        digitalWrite(column[8], 1);
-        digitalWrite(column[12], 0);
-        delay(x);
-        digitalWrite(column[12], 1);
-        digitalWrite(column[13], 0);
-        delay(x);
-        digitalWrite(column[13], 1);
-        digitalWrite(column[15], 0);
-        delay(x);
-        digitalWrite(column[15], 1);
-        digitalWrite(column[14], 0);
-        delay(x);
-        digitalWrite(column[14], 1);
-        digitalWrite(column[11], 0);
-        delay(x);
-        digitalWrite(column[11], 1);
-        digitalWrite(column[7], 0);
-        delay(x);
-        digitalWrite(column[7], 1);
-        digitalWrite(column[3], 0);
-        delay(x);
-        digitalWrite(column[3], 1);
-        digitalWrite(column[2], 0);
-        delay(x);
-        digitalWrite(column[2], 1);
-        digitalWrite(column[1], 0);
-        delay(x);
-        digitalWrite(column[1], 1);
+
+    else{
+      if(h < 40.00){
+        downUpRain();
         printTemp();
       }
-    }
+      if(h >= 60.00){
+        topDownRain();
+        printTemp();
+      }
+      else{
+        goodForSleeping();
+        printTemp();
+      }
+     }
   }
+
+  void coldSleepTemp()
+    {
+      int x = 75;
+      for(int i = 0; i<4; i++)
+      {
+        digitalWrite(layer[i], 0);
+      }
+      for(int y = 0; y<5; y++)
+      {
+        for(int count = 0; count<1; count++)
+        { 
+          for(int i = 4; i>0; i--)
+          {
+            digitalWrite(layer[i], 1);
+            delay(x);
+            digitalWrite(layer[i], 0);
+          }
+          for(int i = 4; i !=0; i--)
+          {
+            digitalWrite(layer[i-1], 1);
+            delay(x);
+            digitalWrite(layer[i-1], 0);
+          }
+        }
+        for(int i = 0; i<4; i++)
+        {
+          digitalWrite(layer[i], 1);
+          delay(x);
+        }
+        for(int i = 4; i!=0; i--)
+        {
+          digitalWrite(layer[i-1], 0);
+          delay(x);
+        }
+          printTemp(); 
+      }
+    }
   
-  void propeller()
-  {
-    
+    void hotSleepTemp() {
     turnEverythingOff();
     int x = 90;
-    for(int y = 4; y>0; y--)
-    {
-      for(int i = 0; i<6; i++)
-      {
+    for(int y = 4; y>0; y--) {
+      for(int i = 0; i<6; i++) {
         //turn on layer
         digitalWrite(layer[y-1], 1);
         //a1
@@ -283,15 +159,83 @@
         delay(x);
       }
         printTemp(); 
+     }
+      //d4
+      turnColumnsOff();
+      digitalWrite(column[0], 0);
+      digitalWrite(column[5], 0);
+      digitalWrite(column[10], 0);
+      digitalWrite(column[15], 0);
+      delay(x);
+      printTemp(); 
     }
-    //d4
-    turnColumnsOff();
-    digitalWrite(column[0], 0);
-    digitalWrite(column[5], 0);
-    digitalWrite(column[10], 0);
-    digitalWrite(column[15], 0);
+
+    void topDownRain() {
+      turnEverythingOff();
+      int x = 100;
+      for(int i = 0; i!=60; i+=2) {
+        int randomColumn = random(0,16);
+        digitalWrite(column[randomColumn], 0);
+        digitalWrite(layer[3], 1);
+        delay(x+50);
+        digitalWrite(layer[3], 0);
+        digitalWrite(layer[2], 1);
+        delay(x+115);
+        digitalWrite(layer[2], 0);
+        digitalWrite(layer[1], 1);
+        delay(x+250);
+        digitalWrite(layer[1], 0);
+        digitalWrite(layer[0], 1);
+        delay(x+50);
+        digitalWrite(layer[0], 0);
+        digitalWrite(column[randomColumn], 1);
+         h = dht.readHumidity();
+         t = dht.readTemperature();
+        printTemp();
+      }
+    }
+  
+  void downUpRain()
+  {
+    turnEverythingOff();
+    int x = 100;
+    for(int i = 0; i!=60; i+=2)
+    {
+      int randomColumn = random(0,16);
+      digitalWrite(column[randomColumn], 0);
+      digitalWrite(layer[0], 1);
+      delay(x+50);
+      digitalWrite(layer[0], 0);
+      digitalWrite(layer[1], 1);
+      delay(x+115);
+      digitalWrite(layer[1], 0);
+      digitalWrite(layer[2], 1);
+      delay(x+250);
+      digitalWrite(layer[2], 0);
+      digitalWrite(layer[3], 1);
+      delay(x+50);
+      digitalWrite(layer[3], 0);
+      digitalWrite(column[randomColumn], 1);
+     h = dht.readHumidity();
+     t = dht.readTemperature();
+     printTemp();
+    }
+  }
+
+    void goodForSleeping()
+  {
+    turnEverythingOff();
+    int x = 1000;
+    for(int i = 0; i<16; i++)
+    {
+      digitalWrite(column[i], 0);
+    }
+    //turning on layers
+    for(int i = 0; i<2; i++)
+    {
+      digitalWrite(layer[i], 1);
+    }
     delay(x);
-    printTemp(); 
   }
   
   void turnColumnsOff()
@@ -303,59 +247,34 @@
       printTemp(); 
   }
   
-  void randomflicker()
-  {
-    turnEverythingOff();
-    int x = 60;
-    for(int i = 0; i !=750; i+=2)
-    {
-    int randomLayer = random(0,4);
-    int randomColumn = random(0,16);
+  void printTemp(){
+     h = dht.readHumidity();
+     t = dht.readTemperature();
+     Serial.print("Humidity in % ");
+     Serial.print(h);
+     Serial.print(" Temperature in °C: ");
+     Serial.println(t); 
+    }
     
-    digitalWrite(layer[randomLayer], 1);
-    digitalWrite(column[randomColumn], 0);
-    delay(x);
-    digitalWrite(layer[randomLayer], 0);
-    digitalWrite(column[randomColumn], 1);
-    delay(x); 
+  void turnEverythingOn() {
+    for(int i = 0; i<16; i++)
+    {
+      digitalWrite(column[i], 0);
+    }
+    //turning on layers
+    for(int i = 0; i<4; i++)
+    {
+      digitalWrite(layer[i], 1);
     }
   }
   
-  /////////////////////////////////////////up and down single layer stomp
-  void layerstompUpAndDown()
-  {
-    int x = 75;
-    for(int i = 0; i<4; i++)
-    {
-      digitalWrite(layer[i], 0);
-    }
-    for(int y = 0; y<5; y++)
-    {
-      for(int count = 0; count<1; count++)
-      { 
-        for(int i = 4; i>0; i--)
-        {
-          digitalWrite(layer[i], 1);
-          delay(x);
-          digitalWrite(layer[i], 0);
-        }
-        for(int i = 4; i !=0; i--)
-        {
-          digitalWrite(layer[i-1], 1);
-          delay(x);
-          digitalWrite(layer[i-1], 0);
-        }
-      }
-      for(int i = 0; i<4; i++)
-      {
-        digitalWrite(layer[i], 1);
-        delay(x);
-      }
-      for(int i = 4; i!=0; i--)
-      {
-        digitalWrite(layer[i-1], 0);
-        delay(x);
-      }
-        printTemp(); 
-    }
-  }
+  void turnEverythingOff() {
+     for(int i = 0; i<16; i++)
+     {
+       digitalWrite(column[i], 1);
+     }
+     for(int i = 0; i<4; i++)
+     {
+       digitalWrite(layer[i], 0);
+     }
+   }
