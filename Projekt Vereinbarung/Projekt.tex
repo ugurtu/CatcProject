@@ -1,0 +1,98 @@
+\documentclass{paper}
+\usepackage[nswissgerman]{babel}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+    \usepackage[a4paper, total={6.5in, 8in}]{geometry}
+\usepackage{collcell,booktabs,siunitx}
+\usepackage{xparse}
+\usepackage{pgfgantt}
+\newcolumntype{F}{>{\collectcell\rememberF}c<{\endcollectcell}}
+\newcolumntype{M}{>{\collectcell\rememberM}c<{\endcollectcell}}
+\newcolumntype{P}{>{\collectcell\computeP}r<{\endcollectcell}}
+
+\newcommand{\rememberF}[1]{%
+  \gdef\kompo{#1}#1%
+}
+\newcommand{\rememberM}[1]{%
+  \gdef\preis{#1}#1%
+}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\computeP}{}
+ {
+  \bfseries\fp_eval:n { round ((\kompo*\preis) , 3 ) }
+ }
+\ExplSyntaxOff
+
+\definecolor{green}{rgb}{0,0.6,0}
+\definecolor{myblue}{RGB}{205,214,230} %BLUE
+\definecolor{mygreen}{RGB}{165, 215, 210}     
+\begin{document}
+\pagestyle{fancy}
+\fancyhead[L]{Projekt sleepCube\\ CatcHS21}                  
+\fancyhead[C]{}                       
+\fancyhead[R]{Silvan Lenzlinger\\Berkan Kurt\\Ugur Turhal}
+\begin{abstract}
+\noindent Das Projekt, sleepCube, ist ein 4 x 4 x 4 Arduino LED-cube. Dieser LED-cube ist mit einem DHT22 Sensor ausgestattet. Dieser Sensor kann die Luftfeuchtigkeit und die Temperatur messen. Für das Projekt ist die letztere Funktion von relevanz.
+\end{abstract}
+
+\section*{Ziel des Projektes} Das Endprodukt, soll als Nachttischlampe dienen, welche anzeigt ob eine angehneme Raumtemperatur für das Schlafen vorhanden ist oder nicht. Diese "angehneme Raumtemperatur für das Schlafen" wird mit zwei Farben angezeigt:\begin{enumerate}[(a)]
+\item \textcolor{red}{ROT} für eine nicht angehme Schlafenstemperatur:\\ $<$(15 - 18)$^{\circ}$C oder $>$ (15 - 18)$^{\circ}$C  
+\item \textcolor{green}{GRÜN} für eine angehme Schlafenstemperatur:\\ (15 - 18)$^{\circ}$C 
+\end{enumerate}
+\section*{Mitglieder}
+Im Projekt involviert sind folgende Personen: 
+\begin{enumerate}[(1)]
+\item Silvan Lenzlinger
+\item Berkan Kurt 
+\item Ugur Turhal
+\end{enumerate}
+\section*{Komponenten und Kosten}
+Für das Projekt benötigte Komponenten, sowohl die Kosten der Komponenten:
+
+\begin{center}
+\begin{tabular}{c F M P}
+\toprule
+  \multicolumn{1}{c}{Komponenten} &
+  \multicolumn{1}{c}{Anzahl} &
+  \multicolumn{1}{c}{\textbf{CHF}} \\
+\midrule
+Arduino Uno ATMega 328 & 1 & 24.94 &  \\
+EVL 1224-10SURC LED, 3 mm, bedrahtet, rot, 400 mcd, 20$^{\circ}$ & 40 & 0.20 &  \\
+EVL 1224-10SYGC LED, 3 mm, bedrahtet, grün, 125 mcd, 25$^{\circ}$ & 40 & 0.20 &  \\
+Widerstand 220$\Omega$& 8 & 0.15 & \\
+28 AWG Elektrischer Draht 13m&1 & 18.50 & \\
+DELOCK Schrumpfschlauch 86264&1 & 6.40 & \\
+Stannol HS10 2510 Lötzinn, bleifrei Spule Sn99,3Cu0,7 250 g 1 mm &1 & 18.15 & \\
+SL 1X40W 2,54 40pol. Stiftleiste, gewinkelt, RM 2,54 & 5 & 0.40 & \\
+RE 200LF Europlatine, Epoxyd, verzinnt 160x100 mm&1 & 6.90 & \\
+DEBO DHT 22 Entwicklerboards - Temperatur- \& Feuchtigkeitssensor, DHT22 &2 & 6.00 & \\
+STECKBOARD 1K2V Experimentier-Steckboard 640/200 Kontakte & 1 & 6.50 &\\
+MagiDeal USB A Male to Female Extenstion Kabel mit Switch On/Off  & 1 & 3.96 &\\ \bottomrule
+\textbf{TOTAL} &  0 & 0 & 116.55 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\subsection*{Links zu den Websiten}
+\begin{enumerate}[(a)]
+\item \url{https://www.reichelt.de/de/de/widerstand-kohleschicht-220-ohm-0207-250-mw-5--1-4w-220-p1382.html?r=1}
+\item \url{https://www.amazon.de/MagiDeal-Female-Extenstion-Kabel-Switch/dp/B01IP1HDUU/ref=sr_1_1?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=Male+to+Female+USB+Cable+with+ON%2FOff+Switch&qid=1637576120&sr=8-1}
+\item \url{https://www.reichelt.com/ch/de/index.html?ACTION=446&LA=102&nbc=1&q=dht22}
+\item \url{https://www.reichelt.de/led-3-mm-bedrahtet-gruen-125-mcd-25--evl-1224-10sygc-p230786.html?&trstct=pol_1&nbc=1}
+\item \url{https://www.reichelt.de/led-3-mm-bedrahtet-rot-400-mcd-20--evl-1224-10surc-p230785.html?&nbc=1&trstct=lsbght_sldr::230786}
+\item \url{https://www.conrad.ch/de/p/stannol-hs10-2510-loetzinn-bleifrei-spule-sn99-3cu0-7-250-g-1-mm-588435.html}
+\item \url{https://www.reichelt.com/experimentier-steckboard-640-200-kontakte-steckboard-1k2v-p67678.html?&trstct=pos_0&nbc=1}
+\item \url{https://www.reichelt.com/40pol-stiftleiste-gewinkelt-rm-2-54-sl-1x40w-2-54-p19507.html?&nbc=1&trstct=lsbght_sldr::19504}
+\item \url{https://www.reichelt.com/europlatine-epoxyd-verzinnt-160x100-mm-re-200lf-p53280.html?&trstct=pol_12&nbc=1}
+\item \url{https://www.microspot.ch/de/spielwaren-drohnen/drohnen-rc-modellbau/rc-elektronik-werkstatt--c819100/delock-schrumpfschlauch-86264--p0002401137?gclid=EAIaIQobChMI4JGa86qV9AIVV-7tCh2GqgdREAQYAiABEgL2yfD_BwE&gclsrc=aw.ds}
+\item \url{https://www.amazon.de/Elektrischer-Silikon-Draht-verschiedene-Isolierter-Temperaturbest%C3%A4ndigkeit/dp/B07G712KWJ/ref=asc_df_B07G712KWJ/?tag=googshopde-21&linkCode=df0&hvadid=308445120684&hvpos=&hvnetw=g&hvrand=1935893886139910953&hvpone=&hvptwo=&hvqmt=&hvdev=m&hvdvcmdl=&hvlocint=&hvlocphy=1003297&hvtargid=pla-530392830435&psc=1&th=1&psc=1&tag=&ref=&adgrpid=61057452133&hvpone=&hvptwo=&hvadid=308445120684&hvpos=&hvnetw=g&hvrand=1935893886139910953&hvqmt=&hvdev=m&hvdvcmdl=&hvlocint=&hvlocphy=1003297&hvtargid=pla-530392830435}
+\item \url{https://www.digitec.ch/de/s1/product/arduino-uno-atmega328-entwicklungsboard-kit-5764177?supplier=3013528}
+\end{enumerate}
+\newpage
+\section*{Zeitplan}
+\input{/home/ugur/Desktop/HS21/gantt/Gantt}
+\end{document}

@@ -55,7 +55,7 @@
      }
 
     else{
-      if(h < 40.00){
+      if(h <= 30.00){
         downUpRain();
         printTemp();
       }
