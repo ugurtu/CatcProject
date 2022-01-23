@@ -7,6 +7,7 @@
 \usepackage{listings}
 \usepackage{blindtext}
 \usepackage{enumitem}
+\usepackage{xurl}
 \usepackage{lipsum}
 \usepackage{tikz}
 \usepackage{hyperref}
@@ -14,6 +15,10 @@
 \usepackage{fontawesome}
 \usepackage{mathtools}
 \usetikzlibrary{positioning}
+\usepackage{titletoc,tocloft}
+\setlength{\cftsubsecindent}{2cm}
+\setlength{\cftsubsubsecindent}{4cm}
+\dottedcontents{section}[1.5em]{}{1.3em}{.6em}
 \usepackage{amssymb,amsmath,amsthm}
 \graphicspath{ {./results/} }
 \usetikzlibrary{shadows,matrix} % Shadows for nodes
@@ -33,7 +38,7 @@
 \begin{document}
 \maketitle
 \tableofcontents
-\addtocontents{toc}{\protect\thispagestyle{empty}}
+%\addtocontents{toc}{\protect\thispagestyle{empty}}
 \newpage
 \begin{center}
 \textbf{Abstract}
@@ -82,8 +87,13 @@ Als Jigs werden Hilfsmittel bezeichnet, die beim Prozess des Fertigstellen das L
 \item \LaTeX \text{ }für die Dokumentenerfassung.
 \end{itemize} 
 \section{Sammeln der Daten}
-Bevor das Projekt begann, wurde für die Sicherstellung des Projektes der Sensor anhand des Serialports ausgelesen. Mittels Python Programmen wurde die Raumtemperatur gesammelt und geplotet. Genauere Aufbauinformationen findet man im Dokument:\textbf{ Aufbau.pdf}. Das Dokument befindet sich auf dem angegebenen GitHub Repository: \url{https://github.com/ugurtu/CatcProject/blob/main/Aufbau\%20DHT\%2C\%20Programme\%20und\%20Daten/Aufbau.pdf}.\\ Den spezfischen Python Code findet man unter: \url{https://github.com/ugurtu/CatcProject/tree/main/SerialPort_python}
-\\ Diesem Dokument aber liegen sowohl der Aufbau des Sensors und auch das Pythonprogramm bei. Wenn man Lüftet, sollte der Sensor in einer bestimmten Zeit eine Reaktion zeigen. Diese Reaktion verhaltet sich in Form von einem entsprechend angehenden LED Lämpchen. Dieses Testen und auslesen des Sensors diente für uns als Sicherstellung. Somit wurde uns klar, dass wir einen funktionstüchtigen Sensor besitzen, welchen wir für dieses Projekt ohne Probleme verwenden konnten.
+Bevor das Projekt begann, wurde für die Sicherstellung des Projektes der Sensor anhand des Serialports ausgelesen. Mittels Python Programmen wurde die Raumtemperatur gesammelt und geplotet. Genauere Aufbauinformationen findet man im Dokument:\textbf{ Aufbau.pdf}. Das Dokument befindet sich auf dem angegebenen GitHub Repository: \begin{itemize}
+\item \url{https://github.com/ugurtu/CatcProject/blob/main/Aufbau\%20DHT\%2C\%20Programme\%20und\%20Daten/Aufbau.pdf}
+\end{itemize} Den spezfischen Python Code findet man unter:
+\begin{itemize}
+\item  \url{https://github.com/ugurtu/CatcProject/tree/main/SerialPort_python}
+\end{itemize}
+Diesem Dokument aber liegen sowohl der Aufbau des Sensors und auch das Pythonprogramm bei. Wenn man Lüftet, sollte der Sensor in einer bestimmten Zeit eine Reaktion zeigen. Diese Reaktion verhaltet sich in Form von einem entsprechend angehenden LED Lämpchen. Dieses Testen und auslesen des Sensors diente für uns als Sicherstellung. Somit wurde uns klar, dass wir einen funktionstüchtigen Sensor besitzen, welchen wir für dieses Projekt ohne Probleme verwenden konnten.
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.49\textwidth]{plot.png}
