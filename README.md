@@ -1,6 +1,13 @@
-# CatcProject
+### CatcProject
 
-This repository provides a directory for building up the DHT-22 Sensor, a Code for a simple modell to use the DHT22 and the LEDs in combination. The directory sensorCube contains the whole Code of the 4 x 4 x 4 led Cube. There is also the possibility to read out the serial port with the help of the python programs which are included in this repository. 
+This repository provides for the sensor Cube and its programms the following directories:
+- building up the DHT-22 Sensor
+- a code for a simple modell to use the DHT22 and the LEDs in combination. 
+- The directory sensor Cube contains the whole code of the 4 x 4 x 4 LED Cube. 
+- There is also the possibility to read out the Serial Port with the help of the python programs which are included in this repository. 
 
-For the Arduino used is the Arduino provided IDE. 
-For python used is PyCharm by JetBrains
+### General Information
+
+- For the Arduino is the Arduino provided IDE used. 
+- We used an Arduino UNO and Arduino ATMega 2560.
+- For python used is PyCharm by JetBrains.
